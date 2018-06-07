@@ -6,8 +6,8 @@ echo "--- Preparing plugin"
 DL="${BUILDKITE_PLUGIN_APTLY_PUBLISH_DOWNLOAD:-}"
 DIST="${BUILDKITE_PLUGIN_APTLY_PUBLISH_DISTRIBUTION:-stretch}"
 
-if [[ "${BUILDKITE_PLUGIN_APTLY_SLUG:-false}" =~ (true|on|1) ]] ; then
-  DL="${DL}/${BUILDKITE_PIPELINE_SLUG}-${DIST}"
+if [[ "${BUILDKITE_PLUGIN_APTLY_PUBLISH_SLUG:-false}" =~ (true|on|1) ]] ; then
+  DL="${DL}/${BUILDKITE_PIPELINE_SLUG}"
   echo "New download: $DL"
 fi
 
