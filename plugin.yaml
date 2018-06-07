@@ -1,0 +1,16 @@
+name: Aptly Publish
+description: Publishes Debian packages with Aptly
+author: https://github.com/open-switch
+requirements:
+  - aptly
+configuration:
+  properties:
+    download:
+      type: string
+    distribution:
+      type: string
+    release:
+      type: string
+  required:
+    - download
+  additionalProperties: false
