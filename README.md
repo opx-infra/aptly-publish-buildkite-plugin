@@ -11,7 +11,8 @@ steps:
   - wait
   - plugins:
       opx-infra/aptly-publish#v0.1.0:
-        download: pool/stretch/$BUILDKITE_PIPELINE_SLUG-stretch/
+        download: pool/stretch-amd64
+        slug: true
         distribution: stretch
 ```
 
@@ -20,6 +21,10 @@ steps:
 ### `download` (required)
 
 The path to use for downloading artifacts to publish.
+
+### `slug` (optional)
+
+Append `${BUILDKITE_PIPELINE_SLUG}-${DIST}` to the `download` location.
 
 ### `distribution` (optional)
 

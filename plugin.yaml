@@ -7,9 +7,9 @@ configuration:
   properties:
     download:
       type: string
+    slug:
+      type: boolean
     distribution:
-      type: string
-    release:
       type: string
   required:
     - download
