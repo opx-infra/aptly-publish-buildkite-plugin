@@ -6,13 +6,12 @@ A [Buildkite plugin](https://buildkite.com/docs/agent/v3/plugins) for publishing
 
 ```yaml
 steps:
-  - command: gbp buildpackage --git-pbuilder
-    artifacts: "*.deb"
+  - command: build.sh
+    artifacts: "pool/stretch-amd64/*"
   - wait
   - plugins:
       opx-infra/aptly-publish#v0.1.2:
         download: pool/stretch-amd64
-        slug: true
         distribution: stretch
 ```
 
