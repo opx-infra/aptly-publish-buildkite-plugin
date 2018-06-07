@@ -23,7 +23,7 @@ The path to use for downloading artifacts to publish.
 
 ### `slug` (optional)
 
-Append `${BUILDKITE_PIPELINE_SLUG}-${DIST}` to the `download` location.
+Append `${BUILDKITE_PIPELINE_SLUG}` to the `download` path.
 
 ### `distribution` (optional)
 
