@@ -36,8 +36,7 @@ fi
 
 echo "+++ Publishing packages to $repo"
 cd ..
-shopt -s extglob
-buildkite-agent artifact download "$DL"/* .
+buildkite-agent artifact download "$DL/*" .
 aptly repo include -keyring=AD5073F1 -repo="$repo" -accept-unsigned "$DL"/*.changes
 for e in "${endpoints[@]}"; do
   aptly publish update "$REL" "$e"
