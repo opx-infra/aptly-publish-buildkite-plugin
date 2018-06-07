@@ -10,7 +10,7 @@ steps:
     artifacts: "*.deb"
   - wait
   - plugins:
-      opx-infra/aptly-publish#v0.1.1:
+      opx-infra/aptly-publish#v0.1.2:
         download: pool/stretch-amd64
         slug: true
         distribution: stretch
