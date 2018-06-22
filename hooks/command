@@ -37,7 +37,16 @@ fi
 echo "+++ Publishing packages to $repo"
 cd ..
 buildkite-agent artifact download "$DL/*" .
-aptly repo include -keyring=AD5073F1 -repo="$repo" -accept-unsigned "$DL"/*.changes
+
+mapfile -t CHANGES < <(find "$DL" -maxdepth 1 -name '*.changes')
+if [[ "${#CHANGES[@]}" -gt 0 ]]; then
+  # we have a changes file to submit
+  aptly repo include -keyring=AD5073F1 -repo="$repo" -accept-unsigned "$DL"/*.changes
+else
+  # submit bare deb files
+  aptly repo add -remove-files "$repo" "$DL"/*.deb
+fi
+
 for e in "${endpoints[@]}"; do
   aptly publish update "$REL" "$e"
 done
