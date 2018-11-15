@@ -42,6 +42,9 @@ mapfile -t CHANGES < <(find "$DL" -maxdepth 1 -name '*.changes')
 if [[ "${#CHANGES[@]}" -gt 0 ]]; then
   # we have a changes file to submit
   aptly repo include -keyring=AD5073F1 -repo="$repo" -accept-unsigned "$DL"/*.changes
+  if [[ "${BUILDKITE_PLUGIN_APTLY_PUBLISH_UNSTABLE:-false}" =~ (true|on|1) ]] ; then
+    aptly repo include -keyring=AD5073F1 -repo="opx-$REL-$DIST" -accept-unsigned "$DL"/*.changes
+  fi
 else
   # submit bare deb files
   aptly repo add -remove-files "$repo" "$DL"/*.deb

@@ -13,6 +13,7 @@ steps:
       opx-infra/aptly-publish#v0.1.2:
         download: pool/stretch-amd64
         distribution: stretch
+        unstable: false
 ```
 
 ## Configuration
@@ -28,6 +29,10 @@ Append `${BUILDKITE_PIPELINE_SLUG}` to the `download` path.
 ### `distribution` (optional)
 
 The Debian distribution to publish to. The default is `stretch`.
+
+### `unstable` (optional)
+
+Additionally publish package to unstable release.
 
 ## License
 
