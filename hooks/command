@@ -43,6 +43,7 @@ if [[ "${#CHANGES[@]}" -gt 0 ]]; then
   # we have a changes file to submit
   if [[ "${BUILDKITE_PLUGIN_APTLY_PUBLISH_UNSTABLE:-false}" =~ (true|on|1) ]] ; then
     aptly repo include -force-replace -no-remove-files -keyring=AD5073F1 -repo="opx-unstable-$DIST" -accept-unsigned "$DL"/*.changes
+    aptly publish update "unstable" "s3:opx:$DIST"
   fi
   aptly repo include -force-replace -keyring=AD5073F1 -repo="$repo" -accept-unsigned "$DL"/*.changes
 else
