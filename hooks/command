@@ -48,7 +48,11 @@ if [[ "${#CHANGES[@]}" -gt 0 ]]; then
   aptly repo include -force-replace -keyring=AD5073F1 -repo="$repo" -accept-unsigned "$DL"/*.changes
 else
   # submit bare deb files
-  aptly repo add -remove-files "$repo" "$DL"/*.deb
+  if [[ "${BUILDKITE_PLUGIN_APTLY_PUBLISH_UNSTABLE:-false}" =~ (true|on|1) ]] ; then
+    aptly repo add -force-replace "opx-unstable-$DIST" "$DL"/*.deb
+    aptly publish update "unstable" "s3:opx:$DIST"
+  fi
+  aptly repo add -force-replace -remove-files "$repo" "$DL"/*.deb
 fi
 
 for e in "${endpoints[@]}"; do
